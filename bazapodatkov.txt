@@ -1,0 +1,138 @@
+
+CREATE DATABASE JakaLeich;
+USE JakaLeich;
+
+CREATE TABLE Film (
+  ID_Film INT AUTO_INCREMENT PRIMARY KEY,
+  Naslov VARCHAR(100),
+  Žanr VARCHAR(50),
+  Trajanje INT,
+  Starostna_omejitev INT
+);
+
+CREATE TABLE Dvorana (
+  ID_Dvorana INT AUTO_INCREMENT PRIMARY KEY,
+  Ime_dvorane VARCHAR(50),
+  Število_sedežev INT
+);
+
+CREATE TABLE Obiskovalec (
+  ID_Obiskovalec INT AUTO_INCREMENT PRIMARY KEY,
+  Ime VARCHAR(50),
+  Priimek VARCHAR(50),
+  Starost INT
+);
+
+CREATE TABLE Projekcija (
+  ID_Projekcija INT AUTO_INCREMENT PRIMARY KEY,
+  Datum DATE,
+  Ura TIME,
+  ID_Film INT,
+  ID_Dvorana INT,
+  FOREIGN KEY (ID_Film) REFERENCES Film(ID_Film),
+  FOREIGN KEY (ID_Dvorana) REFERENCES Dvorana(ID_Dvorana)
+);
+
+CREATE TABLE Vstopnica (
+  ID_Vstopnica INT AUTO_INCREMENT PRIMARY KEY,
+  Cena DECIMAL(5,2),
+  Vrsta ENUM('navadna', 'študentska', 'senior'),
+  ID_Projekcija INT,
+  ID_Obiskovalec INT,
+  FOREIGN KEY (ID_Projekcija) REFERENCES Projekcija(ID_Projekcija),
+  FOREIGN KEY (ID_Obiskovalec) REFERENCES Obiskovalec(ID_Obiskovalec)
+);
+
+CREATE TABLE Rezervirani_sedezi (
+  ID_Vstopnica INT,
+  Sedez VARCHAR(10),
+  FOREIGN KEY (ID_Vstopnica) REFERENCES Vstopnica(ID_Vstopnica)
+);
+
+ALTER TABLE Film
+  ADD CONSTRAINT chk_trajanje CHECK (Trajanje > 0),
+  ADD CONSTRAINT chk_starostna_omejitev CHECK (Starostna_omejitev BETWEEN 0 AND 18);
+
+ALTER TABLE Dvorana
+  ADD CONSTRAINT chk_stevilo_sedezev CHECK (Število_sedežev > 0);
+
+ALTER TABLE Obiskovalec
+  ADD CONSTRAINT chk_starost CHECK (Starost >= 0);
+
+ALTER TABLE Vstopnica
+  ADD CONSTRAINT chk_cena CHECK (Cena >= 0);
+
+
+INSERT INTO Film (Naslov, Žanr, Trajanje, Starostna_omejitev) VALUES
+('Matrix', 'Akcija', 136, 15),
+('Titanic', 'Drama', 195, 12),
+('Toy Story', 'Animirani', 81, 0),
+('Inception', 'Sci-Fi', 148, 12),
+('Joker', 'Drama', 122, 18),
+('Avengers', 'Akcija', 143, 12),
+('Frozen', 'Animirani', 102, 0),
+('Gladiator', 'Drama', 155, 15),
+('Interstellar', 'Sci-Fi', 169, 12),
+('The Lion King', 'Animirani', 88, 0);
+
+
+INSERT INTO Dvorana (Ime_dvorane, Število_sedežev) VALUES
+('Dvorana 1', 100),
+('Dvorana 2', 150),
+('Dvorana 3', 120);
+
+
+INSERT INTO Obiskovalec (Ime, Priimek, Starost) VALUES
+('Jaka', 'Leich', 25),
+('Ana', 'Novak', 19),
+('Marko', 'Kranjc', 35),
+('Eva', 'Zupan', 28),
+('Luka', 'Horvat', 22),
+('Maja', 'Kovac', 30),
+('Tina', 'Petric', 18),
+('Peter', 'Kos', 40),
+('Sara', 'Vidic', 16),
+('Bojan', 'Zoric', 27);
+
+
+INSERT INTO Projekcija (Datum, Ura, ID_Film, ID_Dvorana) VALUES
+('2025-06-08', '18:00:00', 1, 1),
+('2025-06-08', '20:30:00', 2, 1),
+('2025-06-09', '17:00:00', 3, 2),
+('2025-06-09', '19:30:00', 4, 2),
+('2025-06-10', '18:00:00', 5, 3),
+('2025-06-10', '21:00:00', 6, 3),
+('2025-06-11', '16:00:00', 7, 1),
+('2025-06-11', '19:00:00', 8, 1),
+('2025-06-12', '20:00:00', 9, 2),
+('2025-06-12', '18:00:00', 10, 3);
+
+
+INSERT INTO Vstopnica (Cena, Vrsta, ID_Projekcija, ID_Obiskovalec) VALUES
+(10.00, 'navadna', 1, 1),
+(8.00, 'študentska', 1, 2),
+(10.00, 'navadna', 2, 3),
+(7.00, 'senior', 2, 4),
+(9.00, 'navadna', 3, 5),
+(8.00, 'študentska', 3, 6),
+(10.00, 'navadna', 4, 7),
+(7.00, 'senior', 4, 8),
+(10.00, 'navadna', 5, 9),
+(8.00, 'študentska', 5, 10),
+(10.00, 'navadna', 6, 1),
+(7.00, 'senior', 6, 2),
+(9.00, 'navadna', 7, 3),
+(8.00, 'študentska', 7, 4),
+(10.00, 'navadna', 8, 5),
+(7.00, 'senior', 8, 6),
+(10.00, 'navadna', 9, 7),
+(8.00, 'študentska', 9, 8),
+(10.00, 'navadna', 10, 9),
+(7.00, 'senior', 10, 10);
+
+
+INSERT INTO Rezervirani_sedezi (ID_Vstopnica, Sedez) VALUES
+(1, 'A1'), (2, 'A2'), (3, 'B1'), (4, 'B2'), (5, 'C1'),
+(6, 'C2'), (7, 'D1'), (8, 'D2'), (9, 'E1'), (10, 'E2'),
+(11, 'F1'), (12, 'F2'), (13, 'G1'), (14, 'G2'), (15, 'H1'),
+(16, 'H2'), (17, 'I1'), (18, 'I2'), (19, 'J1'), (20, 'J2');

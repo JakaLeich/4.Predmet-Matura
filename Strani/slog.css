@@ -1,0 +1,329 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* vsaj toliko kot celoten zaslon */
+    position: relative; /* za morebitno pozicioniranje notranjih elementov */
+    padding-bottom: 80px; /* rezerviramo prostor za footer, da ne prekriva vsebine */
+}
+
+header {
+    background-color: #1e1e1e;
+    color: #ff9800;
+    padding: 0.5em;
+    text-align: center;
+}
+
+h1 {
+    color: #ff9800;
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 1em 0 0;
+    display: flex; /* postavi v vrsto */
+    justify-content: center; /* centriraj */
+    gap: 1em; /* razmak med elementi */
+}
+
+/* povezave v meniju (glavne) */
+nav ul li a { 
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 0;
+    display: inline-block; /* omogoči padding, ampak ostane v vrsti */
+}
+
+nav ul li a:hover {
+    color: #ff9800; /* ko greš z miško čez, postane oranžno */
+}
+
+/* dropdown meni (drugi nivo) */
+nav ul li ul {
+    display: none; /* skrij, dokler ni hover */
+    position: absolute; /* vzami iz normalnega toka, lahko ga premikamo */
+    top: 20px; /* 20px pod "Filmi" */
+    left: 0; /* poravnaj levo */
+    background-color: #1e1e1e;
+    /* manjka nekaj stilov - verjetno padding, border-radius, min-width... */
+}
+
+nav ul li:hover ul {
+    display: block; /* ko je miška na "Filmi", prikaži dropdown */
+    text-decoration: none;
+}
+
+/* povezave v dropdown meniju */
+nav ul li ul li a {
+    display: block; /* celoten prostor je klikljiv */
+    padding: 0.5em 1em;
+    color: #e0e0e0;
+    white-space: nowrap; /* besedilo se ne zlomi v novo vrstico */
+    text-align: left; /* besedilo poravnano levo */
+}
+
+nav ul li ul li a:hover {
+    background-color: #333; /* temnejše ozadje */
+    color: #ff9800; /* oranžno besedilo */
+}
+
+main {
+    padding: 0 40px;
+    max-width: 900px; /* največja širina */
+    margin: 0 auto; /* centrirano levo-desno */
+    line-height: 1.6; /* večji razmak med vrsticami za boljšo berljivost */
+    background-color: #1e1e1e;
+    border-radius: 8px; /* zaobljeni robovi */
+    box-shadow: 0 0 10px rgba(255,152,0,0.3); /* rahla oranžna senca okoli */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* da se robovi ne podvojijo */
+    margin-top: 1em;
+    background-color: #121212;
+    border-radius: 6px;
+    overflow: hidden; /* brez tega ne bi videli zaobljenih robov */
+    border: 1px solid #333;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 0.75em 1em;
+    text-align: left;
+}
+
+
+form {
+    margin-top: 1em;
+}
+
+input, select, button {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    padding: 0.5em;
+    border-radius: 4px;
+    font-size: 1em;
+}
+/* rezerviraj.php,dodajfilm */
+button:hover {
+    background-color: #ff9800;
+    color: #121212;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #1e1e1e;
+    color: #ff9800;
+    padding: 1em;
+    text-align: center;
+    position: fixed; /* prilepi footer na dno, tudi ko drsiš dol */
+    bottom: 0; /* čisto na dno */
+    width: 100%;
+    height: 40px;
+    box-shadow: 0 -2px 5px #ff9800; /* senca na zgornji strani (minus pomeni gor) */
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1em 0;
+}
+
+ul li {
+    padding-left: 1.2em;
+    margin-bottom: 0.6em;
+    position: relative; /* to rabimo, da se tista oranžna črtica lahko kam nasloni */
+}
+
+ul li:before {
+    content: ""; /* ustvarimo nekaj pred li-jem, čeprav je prazno */
+    position: absolute; /* lahko ga premikamo neodvisno */
+    left: 0;
+    top: 0.4em; /* malo spustimo dol, da ni čisto pri vrhu */
+    width: 4px;
+    height: 1em; /* visoko kot ena vrstica besedila */
+    background-color: #ff9800;
+    border-radius: 4px; /* malo zaobljeno, da ni tako ostro */
+}
+
+hr {
+    border: none; /* stran z navadno obrobo */
+    height: 3px;
+    background: linear-gradient(to right, transparent, #ff9800, transparent); /* oranžna črta, ki na robovih zbledi */
+    margin: 2em 0;
+}
+
+.filmi {
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.vsakfilem{
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255,152,0,0.3); /* rahla oranžna žareča senca okoli kartice */
+    overflow: hidden; /* če gre kaj čez rob, se obreže (zaradi zaobljenih robov) */
+}
+
+.vsakfilem img {
+    width: 100%;
+    height: auto;
+    display: block; /* slike so po defaultu inline, to povzroča dodaten presledek - to to reši */
+}
+
+.film-info {
+    padding: 1rem;
+}
+
+.film-info h2 {
+    color: #ff9800;
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.form-film {
+    max-width: 450px;
+    margin: 2rem auto 3rem; /* auto pomeni centrirano levo-desno */
+    padding: 1.5rem 2rem;
+    background-color: #1e1e1e;
+    border: 1px solid #ff9800;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* vse notri daj drug pod drugega */
+    gap: 1.25rem; /* razmak med elementi */
+}
+
+.form-film label {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.form-film input {
+    border-width: 2px;
+}
+
+.tabela1 {
+    color: #ff9800;
+    text-align: center;
+    font-weight: bold;
+    margin: 2em 0 1em;
+}
+
+.btn-izbris, .btn-rezerviraj, .gumbek {
+    display: inline-block;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-izbris, .gumbek {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+.btn-rezerviraj {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-rezerviraj:hover {
+    background-color: #45a049;
+}
+
+.projekcijaizpis {
+    display: grid;
+    gap: 2em;
+    padding: 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projekcijaposebaj {
+    background: #1e1e1e;
+    border-radius: 16px;
+    padding: 1.5em;
+    border: 1px solid #333;
+}
+
+.projekcijaposebaj h2 {
+    color: #ff9800;
+    font-size: 1.6em;
+    margin: 0 0 0.5em;
+}
+
+.projekcijaposebaj p {
+    margin: 0.4em 0;
+    color: #ddd;
+}
+
+.projekcijaposebaj p strong {
+    color: #ff9800;
+}
+
+.sedezi {
+    display: flex;
+    flex-direction: column; /* sedeže zloži pod drugega */
+    align-items: center; /* centriraj po horizontali */
+    gap: 0.8em;
+    margin-bottom: 2em;
+}
+
+.vrsta {
+    display: flex;
+    justify-content: center; /* sedeže v vrsti centriraj */
+    gap: 0.5em;
+}
+
+.sedez {
+    padding: 0.5em 0.7em;
+    border: 2px solid green;
+    border-radius: 6px;
+    background-color: green;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sedez.zaseden {
+    background-color: red;
+    border-color: red;
+    color: white;
+    cursor: not-allowed; /* pokaži, da se ne da kliknit */
+}
+
+.sedez input {
+    display: none; /* skrij checkbox, ker imamo svoj stiliran gumb */
+}
+
+
+.obvestilo {
+    background-color: #1e1e1e;
+    color: #ff9800;
+    padding: 1em 1.5em;
+    border: 2px solid #ff9800;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 3em auto 2em; /* auto spet za centriranje */
+    text-align: center;
+    font-weight: bold;
+}
+
+.naslovcek {
+    text-align: center;
+    color: #ff9800;
+}
+
+.gumbek {
+    margin: 1em auto;
+    text-align: center;
+    display: table; /* poseben trik za centriranje */
+}
