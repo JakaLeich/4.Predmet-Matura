@@ -1,0 +1,907 @@
+/* ============================================================
+   SLOG.CSS - Kino aplikacija
+   Avtor: Jaka Leich, 4.dr 2026
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   OSNOVA - body, header, h1
+   Uporablja se na vseh straneh (glava.php vrstica 1-26)
+   ------------------------------------------------------------ */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    padding-bottom: 80px; /* prostor za fiksen footer */
+}
+
+header {
+    /* glava.php vr. 9 - zgornji pas s Kino logotipom */
+    background-color: #1e1e1e;
+    color: #ff9800;
+    padding: 0.5em;
+    text-align: center;
+}
+
+h1 {
+    /* glava.php vr. 10 - naslov "Kino" v headerju */
+    color: #ff9800;
+    margin: 0;
+}
+
+/* ------------------------------------------------------------
+   NAV - navigacijski meni
+   glava.php vr. 11-25 - glavni meni z linki
+   ------------------------------------------------------------ */
+nav ul {
+    /* vodoravni seznam menijev */
+    list-style: none;
+    padding: 0;
+    margin: 1em 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+nav ul li {
+    /* posamezen element menija */
+    padding-left: 0;
+    margin-bottom: 0;
+    position: relative;
+}
+
+nav ul li::before {
+    /* prepreči oranžno črtico ki jo doda main ul li::before */
+    display: none;
+}
+
+nav ul li a {
+    /* link v meniju */
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 0;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    /* link ob hover */
+    color: #ff9800;
+}
+
+nav ul li ul {
+    /* dropdown podmeni (Filmi → Vsi filmi, Dodaj film) */
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    background-color: #1e1e1e;
+    z-index: 100;
+}
+
+nav ul li:hover ul {
+    /* pokaži dropdown ob hover */
+    display: block;
+}
+
+nav ul li ul li a {
+    /* link v dropdownu */
+    display: block;
+    padding: 0.5em 1em;
+    color: #e0e0e0;
+    white-space: nowrap;
+    text-align: left;
+}
+
+nav ul li ul li a:hover {
+    background-color: #333;
+    color: #ff9800;
+}
+
+/* ------------------------------------------------------------
+   MAIN - vsebinski del strani
+   noga.php vr. 1 zapre </main>, glava.php vr. 26 odpre <main>
+   ------------------------------------------------------------ */
+main {
+    padding: 0 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    line-height: 1.6;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255,152,0,0.3);
+}
+
+/* ------------------------------------------------------------
+   TABELE
+   izpis_vstopnice.php vr. 40, rezervacije_izpis.php vr. 24
+   ------------------------------------------------------------ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+    background-color: #121212;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 0.75em 1em;
+    text-align: left;
+}
+
+/* ------------------------------------------------------------
+   FORME - splošni stil za vnosna polja
+   dodaj_film.php, rezerviraj.php
+   ------------------------------------------------------------ */
+form {
+    margin-top: 1em;
+}
+
+input, select, button {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    padding: 0.5em;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #ff9800;
+    color: #121212;
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------------
+   FOOTER - spodnji pas
+   noga.php vr. 2-4 - fiksen na dnu zaslona
+   ------------------------------------------------------------ */
+footer {
+    background-color: #1e1e1e;
+    color: #ff9800;
+    padding: 1em;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    box-shadow: 0 -2px 5px #ff9800;
+}
+
+/* ------------------------------------------------------------
+   SEZNAM znotraj main
+   index.php vr. 8-17 - seznam funkcionalnosti aplikacije
+   ------------------------------------------------------------ */
+main ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1em 0;
+}
+
+main ul li {
+    padding-left: 1.2em;
+    margin-bottom: 0.6em;
+    position: relative;
+}
+
+main ul li::before {
+    /* oranžna navpična črtica pred vsakim li elementom */
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.4em;
+    width: 4px;
+    height: 1em;
+    background-color: #ff9800;
+    border-radius: 4px;
+}
+
+hr {
+    /* index.php vr. 9 - ločilna črta med naslovom in karticami */
+    border: none;
+    height: 3px;
+    background: linear-gradient(to right, transparent, #ff9800, transparent);
+    margin: 2em 0;
+}
+
+/* ------------------------------------------------------------
+   GUMBI
+   ------------------------------------------------------------ */
+
+/* .btn-izbris - film_izpis.php vr. 54 - gumb za brisanje filma */
+/* .gumbek - izpis_vstopnice.php vr. 76, rezervacije_izpis.php vr. 43,
+             obdelaj_rezervacijo_obvestilo.php vr. 11 - gumb za nazaj */
+.btn-izbris, .gumbek {
+    display: inline-block;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #ff9800;
+    color: #fff;
+}
+
+.gumbek {
+    /* centrira gumb z display:table trikom */
+    margin: 1em auto;
+    text-align: center;
+    display: table;
+}
+
+/* .btn-primarni - dodaj_film.php vr. 22 - gumb "Dodaj film" */
+.btn-primarni {
+    background-color: #ff9800;
+    color: #121212;
+    border: none;
+    padding: 0.75em;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.btn-primarni:hover {
+    background-color: #e68900;
+}
+
+/* .btn-potrdi - rezerviraj.php vr. 113 - gumb "Potrdi rezervacijo" */
+.btn-potrdi {
+    background-color: #ff9800;
+    color: #121212;
+    border: none;
+    padding: 0.7em;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.btn-potrdi:hover {
+    background-color: #e68900;
+}
+
+/* ------------------------------------------------------------
+   OBVESTILA IN SPOROČILA
+   ------------------------------------------------------------ */
+
+/* .tabela1 - izpis_vstopnice.php vr. 14,40,70 | rezervacije_izpis.php vr. 14,24,37
+              projekcija_izpis.php vr. 74 - sporočila in tabele z oranžnim tekstom */
+.tabela1 {
+    color: #ff9800;
+    text-align: center;
+    font-weight: bold;
+    margin: 2em 0 1em;
+}
+
+/* .obvestilo - obdelaj_rezervacijo_obvestilo.php vr. 6,8
+                okvir za sporočilo o uspešni/neuspešni rezervaciji */
+.obvestilo {
+    background-color: #1e1e1e;
+    color: #ff9800;
+    padding: 1em 1.5em;
+    border: 2px solid #ff9800;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 3em auto 2em;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* .naslovcek - izpis_vstopnice.php vr. 39 | rezervacije_izpis.php vr. 23
+                naslov nad tabelo */
+.naslovcek {
+    text-align: center;
+    color: #ff9800;
+}
+
+/* ------------------------------------------------------------
+   FORMA ZA DODAJANJE FILMA
+   dodaj_film.php vr. 5 - obrazec za vnos novega filma
+   ------------------------------------------------------------ */
+.form-film {
+    max-width: 500px;
+    margin: 2rem auto 3rem;
+    padding: 2rem;
+    background-color: #1a1a1a;
+    border: 1px solid #ff9800;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.form-film label {
+    /* labele v obrazcu za dodajanje filma */
+    color: #ff9800;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.form-film input {
+    /* vnosna polja v obrazcu za dodajanje filma */
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 0.6em;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+/* ------------------------------------------------------------
+   FILMI - MREŽA POSTERJEV
+   film_izpis.php vr. 79,86,94 - prikaz filmov v mreži
+   ------------------------------------------------------------ */
+
+/* .seznam-naslov - film_izpis.php vr. 83 | projekcija_izpis.php vr. 43
+                    dodaj_film.php vr. 3 | rezerviraj.php vr. 49
+                    glavni naslov strani na sredini */
+.seznam-naslov {
+    text-align: center;
+}
+
+/* .sekcija-naslov - film_izpis.php vr. 86,93
+                     naslovi sekcij "V kinu zdaj" in "Kmalu v kinu" */
+.sekcija-naslov {
+    color: #ff9800;
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+
+/* .filmi - film_izpis.php vr. 87,94 - grid mreža filmskih kartic */
+.filmi {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    padding: 1rem 0 3rem;
+}
+
+/* .filmi-kmalu - film_izpis.php vr. 94 - zmanjša vidnost kartic za prihajajoče filme */
+.filmi-kmalu .vsakfilem {
+    opacity: 0.75;
+}
+
+.filmi-kmalu .vsakfilem:hover {
+    opacity: 1;
+}
+
+/* .vsakfilem - film_izpis.php vr. 45 - posamezna filmska kartica */
+.vsakfilem {
+    background-color: #121212;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.vsakfilem:hover {
+    transform: translateY(-4px);
+    border-color: #ff9800;
+}
+
+.vsakfilem img {
+    /* poster slika filma znotraj kartice */
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+/* .film-info - film_izpis.php vr. 49 - besedilni del pod posterjem */
+.film-info {
+    padding: 0.8rem;
+}
+
+.film-info h2 {
+    /* naslov filma v kartici */
+    color: #e0e0e0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+    line-height: 1.3;
+}
+
+.film-info p {
+    /* žanr, trajanje, starostna omejitev */
+    color: #888;
+    font-size: 1.1rem;
+    margin: 0.2rem 0;
+}
+
+.film-info p strong {
+    /* labele (Žanr:, Trajanje: itd.) */
+    color: #ff9800;
+}
+
+@media (max-width: 900px) {
+    .filmi { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 580px) {
+    .filmi { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ------------------------------------------------------------
+   PROJEKCIJE - MREŽA
+   projekcija_izpis.php vr. 45-74
+   ------------------------------------------------------------ */
+
+/* .projekcijaizpis - projekcija_izpis.php vr. 45 - grid mreža projekcij */
+.projekcijaizpis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    padding: 1rem 0 3rem;
+}
+
+/* .projekcijaposebaj - projekcija_izpis.php vr. 58 - posamezna kartica projekcije */
+.projekcijaposebaj {
+    background-color: #121212;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.projekcijaposebaj:hover {
+    transform: translateY(-4px);
+    border-color: #ff9800;
+}
+
+.projekcijaposebaj img {
+    /* poster filma na kartici projekcije */
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+/* .projekcija-info - projekcija_izpis.php vr. 62 - besedilni del kartice */
+.projekcija-info {
+    padding: 0.8rem;
+}
+
+.projekcija-info h2 {
+    /* naslov filma na kartici projekcije */
+    color: #e0e0e0;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.2rem;
+    line-height: 1.3;
+}
+
+/* .dvorana-text - projekcija_izpis.php vr. 64 - ime dvorane pod naslovom */
+.dvorana-text {
+    color: #888;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+/* .termin-datum - projekcija_izpis.php vr. 66 - datum projekcije */
+.termin-datum {
+    display: block;
+    color: #666;
+    font-size: 0.75rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.3rem;
+}
+
+/* .termin-ura - projekcija_izpis.php vr. 67 - klikljiv gumb z uro projekcije */
+.termin-ura {
+    display: inline-block;
+    background-color: #222;
+    color: #e0e0e0;
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 0.3em 0.7em;
+    border-radius: 4px;
+    margin: 0.2rem 0.1rem 0 0;
+    border: 1px solid #444;
+    text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+   REZERVACIJA - rezerviraj.php
+   ------------------------------------------------------------ */
+
+/* .rezerv-poster - rezerviraj.php vr. 58 - velik poster filma nad sedeži */
+.rezerv-poster {
+    width: 300px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 4px 20px rgba(255,152,0,0.3);
+}
+
+/* .rezervacija-info - rezerviraj.php vr. 50 - datum, ura, dvorana pod naslovom */
+.rezervacija-info {
+    text-align: center;
+    color: #aaa;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.rezervacija-info strong {
+    color: #ff9800;
+}
+
+/* .legenda - rezerviraj.php vr. 62 - vrstica s pojasnili barv sedežev */
+.legenda {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.2rem;
+    font-size: 0.85rem;
+}
+
+/* .legenda-item - rezerviraj.php vr. 63-65 - posamezna legenda (ikona + besedilo) */
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #aaa;
+}
+
+/* .legenda-barvica - rezerviraj.php vr. 63-65 - barvni kvadratek v legendi */
+.legenda-barvica {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.legenda-barvica.prosto   { background-color: green; }  /* rezerviraj.php vr. 63 */
+.legenda-barvica.zasedeno { background-color: red; }    /* rezerviraj.php vr. 64 */
+.legenda-barvica.izbrano  { background-color: #ff9800; } /* rezerviraj.php vr. 65 */
+
+/* .sedezi - rezerviraj.php vr. 72 - okvir z mrežo sedežev */
+.sedezi {
+    background-color: #0a0a0a;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 0 auto 1.5rem;
+    border: 1px solid #222;
+    display: table; /* display:table + margin:auto = centriranje bloka */
+}
+
+/* .vrsta - rezerviraj.php vr. 79 - ena vodoravna vrsta sedežev (A1-A10 itd.) */
+.vrsta {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+
+/* .sedez - rezerviraj.php vr. 85 - posamezen sedež */
+.sedez {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #2a7a2a;
+    border-radius: 5px;
+    background-color: #1a5c1a;
+    cursor: pointer;
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #e0e0e0;
+    transition: background-color 0.15s, transform 0.1s;
+}
+
+.sedez:hover {
+    /* prosto mesto ob hover postane oranžno */
+    background-color: #ff9800;
+    border-color: #ff9800;
+    color: #121212;
+    transform: scale(1.1);
+}
+
+/* .sedez.zaseden - rezerviraj.php vr. 85 - zaseden sedež (rdeč) */
+.sedez.zaseden {
+    background-color: #7a1a1a;
+    border-color: #a02020;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.sedez.zaseden:hover {
+    transform: none;
+    background-color: #7a1a1a;
+}
+
+.sedez input {
+    /* skrij dejanski checkbox, sedež je vizualni label */
+    display: none;
+}
+
+/* .rezervacija-forma - rezerviraj.php vr. 99 - obrazec za vnos podatkov obiskovalca */
+.rezervacija-forma {
+    max-width: 400px;
+    margin: 0 auto 2rem;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.rezervacija-forma label {
+    /* labele (Ime, Priimek, Starost, Vrsta vstopnice) */
+    color: #ff9800;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.rezervacija-forma input,
+.rezervacija-forma select {
+    /* vnosna polja v obrazcu */
+    width: 100%;
+    padding: 0.5em;
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+/* ------------------------------------------------------------
+   INDEX STRAN
+   index.php vr. 3-32
+   ------------------------------------------------------------ */
+
+/* .index-naslov - index.php vr. 3 - zgornji del z naslovom in podnaslovom */
+.index-naslov {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+}
+
+.index-naslov h2 {
+    color: #ff9800;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.index-naslov p {
+    color: #888;
+    font-size: 1rem;
+}
+
+/* .index-kartice - index.php vr. 10 - grid z 3 karticami (Filmi, Projekcije, Vstopnice) */
+.index-kartice {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 1rem 2rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* .index-kartica - index.php vr. 11,18,25 - posamezna kartica na domači strani */
+.index-kartica {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.index-kartica:hover {
+    border-color: #ff9800;
+    transform: translateY(-4px);
+}
+
+/* .index-kartica-ikona - index.php vr. 12,19,26 - emoji ikona na vrhu kartice */
+.index-kartica-ikona {
+    font-size: 2.5rem;
+}
+
+.index-kartica h3 {
+    /* naslov kartice (Filmi / Projekcije / Vstopnice) */
+    color: #ff9800;
+    margin: 0.5rem 0;
+}
+
+.index-kartica p {
+    /* opis kartice */
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.index-kartica a {
+    /* gumb na kartici (Oglej si filme itd.) */
+    display: inline-block;
+    margin-top: 1rem;
+    background: #ff9800;
+    color: #121212;
+    padding: 0.5em 1.2em;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.index-kartica a:hover {
+    background: #e68900;
+}
+
+/* ------------------------------------------------------------
+   FILM DETAIL STRAN
+   film_detail.php - podrobna stran posameznega filma
+   ------------------------------------------------------------ */
+
+/* .detail-wrapper - film_detail.php - flex layout poster levo, info desno */
+.detail-wrapper {
+    display: flex;
+    gap: 3rem;
+    padding: 2rem 0 4rem;
+    align-items: flex-start;
+}
+
+/* .detail-levo - film_detail.php - leva stran s posterjem */
+.detail-levo {
+    flex: 0 0 280px;
+}
+
+/* .detail-poster - film_detail.php - velik poster filma */
+.detail-poster {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(255,152,0,0.4);
+}
+
+/* .detail-desno - film_detail.php - desna stran z vsemi podatki */
+.detail-desno {
+    flex: 1;
+}
+
+/* .detail-naslov - film_detail.php - velik naslov filma */
+.detail-naslov {
+    color: #ff9800;
+    font-size: 2.2rem;
+    margin: 0 0 0.5rem;
+}
+
+/* .detail-ocena - film_detail.php - ocena z zvezdico */
+.detail-ocena {
+    font-size: 1.6rem;
+    color: #ff9800;
+    margin-bottom: 1.2rem;
+}
+
+.detail-ocena span {
+    color: #e0e0e0;
+    font-size: 1.3rem;
+}
+
+/* .detail-meta - film_detail.php - tabela z žanrom, trajanjem, starostjo */
+.detail-meta {
+    background-color: #0a0a0a;
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #222;
+}
+
+/* .detail-meta-vrstica - film_detail.php - ena vrstica v tabeli */
+.detail-meta-vrstica {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 1rem;
+}
+
+.detail-meta-vrstica:last-child {
+    border-bottom: none;
+}
+
+/* .detail-label - film_detail.php - leva stran vrstice (Žanr, Trajanje itd.) */
+.detail-label {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+/* .detail-starost - film_detail.php - starostna oznaka */
+.detail-starost {
+    background-color: #ff9800;
+    color: #121212;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+/* .detail-opis - film_detail.php - opis filma */
+.detail-opis {
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+/* .detail-termin-naslov - film_detail.php - naslov nad gumbi terminov */
+.detail-termin-naslov {
+    color: #ff9800;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+
+/* .detail-termini - film_detail.php - flex ovojnica za termine */
+.detail-termini {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+/* .detail-termin-gumb - film_detail.php - klikljiv gumb za rezervacijo določenega termina */
+.detail-termin-gumb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    text-decoration: none;
+    transition: border-color 0.2s, background-color 0.2s;
+    min-width: 100px;
+}
+
+.detail-termin-gumb:hover {
+    border-color: #ff9800;
+    background-color: #222;
+}
+
+/* .detail-termin-datum - film_detail.php - datum v gumbu termina */
+.detail-termin-datum {
+    color: #888;
+    font-size: 0.75rem;
+}
+
+/* .detail-termin-ura - film_detail.php - ura v gumbu termina */
+.detail-termin-ura {
+    color: #e0e0e0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* .detail-termin-dvorana - film_detail.php - ime dvorane v gumbu termina */
+.detail-termin-dvorana {
+    color: #666;
+    font-size: 0.75rem;
+}
+
+/* .vsakfilem-link - film_izpis.php - ovojni link okoli filmske kartice */
+.vsakfilem-link {
+    text-decoration: none;
+    display: block;
+}
+
+/* .film-naslov-link - film_izpis.php - link na naslovu filma do detail strani */
+.film-naslov-link {
+    color: #e0e0e0;
+    text-decoration: none;
+}
+
+.film-naslov-link:hover {
+    color: #ff9800;
+}
